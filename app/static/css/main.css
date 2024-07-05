@@ -1,0 +1,86 @@
+body {
+    background: linear-gradient(45deg, #5900b1, black);
+    margin: 0;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.welcome {
+    color: rgba(221, 219, 219, 0.91);
+    font-family: Jost, sans-serif;
+    font-size: 40px;
+    margin: 10px 10px;
+}
+
+.field-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+label{
+    font-family: Jost;
+    font-size: 20px;
+    color: rgba(221, 219, 219, 0.91);
+    margin-bottom: 0.5dvh;
+    justify-self: center;
+    align-self: flex-start;
+}
+
+.field-input input{
+    width: 30dvw;
+    height: 5dvh;
+    border: 0;
+    border-radius: 6px;
+    fill: #FFF;
+    stroke-width: 1px;
+    stroke: #DDD;
+    margin-bottom: 1dvh;
+    padding-left: 10px;
+    font-family: Jost, sans-serif;
+    font-size: 16px;
+}
+
+.select{
+    width: 30.7dvw;
+    height: 5dvh;
+    border: 0;
+    border-radius: 6px;
+    fill: #FFF;
+    color: #616161;
+    margin-bottom: 0.8dvh;
+    padding-left: 10px;
+    font-family: Jost, sans-serif;
+    font-size: 16px;
+}
+
+input::placeholder {
+    opacity: 1;
+    color: #616161;
+}
+
+input:-ms-input-placeholder {
+    color: #616161;
+}
+
+input::-ms-input-placeholder {
+    color: #616161;
+}
+
+.field-input input[type="submit"]{
+    background: rgba(9, 9, 189, 0.86);
+    width: 10dvw;
+    color: #FFF;
+    font-family: Jost, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 2dvh;
+}

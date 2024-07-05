@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title> Вакансии </title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@100..900&display=swap');
+    </style>
+</head>
+<body>
+{% if start %}
+<div class="container">
+    <div class="welcome">
+        Введите название профессии:
+    </div>
+    <form method="POST" action="{% url "vacancies" %}"> 
+        {% csrf_token %}
+        <div class="field-input">
+            <label for="text"> Профессия, должность или название вакансии: </label>
+            <input
+                name="text"
+                type="text"
+            >
+            <label for="salary"> Размер заработной платы: </label> 
+            <input class="salary" 
+            id="salary"
+            name="salary"
+            >
+            <label for="currency"> Валюта заработной платы </label> 
+            <select class="select" id="currency" name='currency'>
+                <option value="null"> Не учитывать этот фильтр </option>
+                <option value="RUR"> RUB </option>
+                <option value="AZN"> AZN </option> 
+                <option value="BYR"> BYR </option> 
+                <option value="EUR"> EUR </option> 
+                <option value="GEL"> GEL </option> 
+                <option value="KGS"> KGS </option> 
+                <option value="KZT"> KZT </option> 
+                <option value="USD"> USD </option> 
+                <option value="UZS"> UZS </option> 
+            </select>
+            <label for="experience"> Опыт работы </label> 
+            <select class="select" id="experience" name='experience'>
+                <option value="null"> Не учитывать этот фильтр </option>
+                <option value="noExperience"> Нет опыта</option>
+                <option value="between1And3"> От 1 года до 3 лет </option>
+                <option value="between3And6"> От 3 лет до 6 лет </option>
+                <option value="moreThan6"> Более 6 лет </option>
+            </select>
+            <label for="employment"> Тип занятости </label> 
+            <select class="select" id="employment" name='employment'>
+                <option value="null"> Не учитывать этот фильтр </option>
+                <option value="full"> Полная занятость </option>
+                <option value="part"> Частичная занятость </option>
+                <option value="project"> Проектная работа </option>
+                <option value="volunteer"> Волонтерство </option>
+                <option value="probation"> Стажировка </option>
+            </select>
+            <input type="submit" value="Найти вакансии">
+        </div>
+    </form>
+{% endif %}
+</div>
+</body>
+</html>

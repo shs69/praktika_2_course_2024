@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  db:
+    build:
+      context: ./PostgreSQL
+    environment:
+      POSTGRES_DB: parser_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qwe123
+    networks:
+      - app_network
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: ./app
+    command:  bash -c "python manage.py migrate && 
+                      python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./app:/app
+    environment:
+      PGSERVICEFILE: /etc/postgresql-common/pg_service.conf
+    networks:
+      - app_network
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    links:
+      - db:db
+
+volumes:
+  db-data:
+
+networks:
+  app_network:
+    driver: bridge

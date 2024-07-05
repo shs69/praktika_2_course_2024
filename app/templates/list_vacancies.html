@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> Вакансии </title>
+    <link rel="stylesheet" href="{% static 'css/vacancies.css' %}" type="text/css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@100..900&display=swap');
+    </style>
+</head>
+<body class="vacancies">
+    <div class="welcome">
+        Вакансий найдено: {{count}}
+    </div>
+    <ol class="vacancies-list">
+        {% for vacancy in page_obj %}
+            <li class="vacancy-item">
+                <div class="vacancy-name">
+                    {{ vacancy.vacancy_name|title}}
+                </div>
+                <div class="vacancy-salary"> 
+                    {% if vacancy.min_salary == 0%}
+                        
+                    {% else %} 
+                       от {{ vacancy.min_salary }}
+                    {% endif %} 
+                    {% if vacancy.max_salary == 2147483647%}
+                        
+                    {% else %} 
+                       до {{ vacancy.max_salary }}
+                    {% endif %}
+                    {% if vacancy.min_salary == 0 and vacancy.max_salary == 2147483647%}
+                        Зарплата не указана
+                    {% elif  vacancy.currency == "RUR"%}
+                        RUB
+                    {% else %} 
+                       {{ vacancy.currency}}
+                    {% endif %}  
+                   
+                </div>
+                <div class="vacancy-information"> 
+                    {{ vacancy.information|truncatechars:300}}
+                </div>
+                <div class="url">
+                    <a class="url-item" href={{vacancy.url}} target="_blank"> Полная вакансия </a>
+                </div> 
+            </li>
+        {% endfor %}
+    </ol>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+            <form class="sub-form" method="POST" action="{% url "index" %}"> 
+                {% csrf_token %}
+                <input type="submit" class="sub-but" value="Домой"></input>
+            </form>
+        </span>
+    </div>
+</body>
+</html>
